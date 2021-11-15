@@ -16,5 +16,14 @@ router.post('/events', createEvent);
 router.post('/club', createClub);
 router.post('/bewertung', createBewertung);
 
+// Alle Lokale und deren avg Bewertungen
+// Alle Infos (Infos, Events, Bewertungen) über ein Lokal
+
+// Update Club
+// Update Events
+
+// Delete Club
+// Delete Events
+
 // Export router
 module.exports = router;

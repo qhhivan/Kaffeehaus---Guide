@@ -26,4 +26,12 @@ const createClub = asyncHandler(async (req, res) => {
   res.status(code).json(data);
 });
 
+// Alle Lokale und deren avg Bewertungen
+// Alle Infos (Infos, Events, Bewertungen) über ein Lokal
+
+// Update Club
+// Update Events
+
+// Delete Club
+// Delete Events
 module.exports = { getEvents, createEvent, createClub, createBewertung };

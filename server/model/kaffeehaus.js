@@ -82,10 +82,44 @@ async function createBewertung(bewertung) {
 }
 
 // Update Club
+async function updateClub(id, newClub) {
+  try {
+    const { club } = await db.query('Select * from lokal where id = $1', [id]);
+
+    // Wenn es dieses Lokal nicht gibt soll eine Fehlermeldung ausgegeben werden
+    if (club[0] === undefined) {
+      return {
+        code: 404,
+        data: 'Not found',
+      };
+    }
+    await db.query(
+      'update lokal set (address, website, music, phone_number, price, opening_hours)  = ($1, $2, $3, $4, $5) where id = $6',
+      [
+        newClub.address,
+        newClub.website,
+        newClub.music,
+        newClub.phone_number,
+        newClub.price,
+        newClub.name,
+        newClub.opening_hours,
+        id,
+      ],
+    );
+  } catch (error) {
+    return { code: 500, data: error.message };
+  }
+}
 // Update Events
 
 // Delete Club
 // Delete Events
 
 // Export
-module.exports = { getEvents, createClub, createEvent, createBewertung };
+module.exports = {
+  getEvents,
+  createClub,
+  createEvent,
+  createBewertung,
+  updateClub,
+};
