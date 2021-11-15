@@ -1,2 +1,26 @@
 # All Events
 GET http://localhost:3000/events
+
+###
+# Create Event
+POST http://localhost:3000/events
+Content-Type: application/json
+
+{
+    "title": "Test Event - Loco",
+    "description": "Happyhour",
+    "time": "19:00",
+    "date": "06.11.2021",
+    "lokal_id": 5
+}
+###
+
+#Create Bewertung
+POST http://localhost:3000/bewertung
+Content-Type: application/json
+
+{
+    "stars": 4,
+    "description": "Test Bewertung",
+    "lokal_id": 2
+}

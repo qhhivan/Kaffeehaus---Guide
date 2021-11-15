@@ -1,12 +1,20 @@
 const express = require('express');
 // Controllers Importieren
-const { getEvents } = require('../controllers/kaffeehaus');
+const {
+  getEvents,
+  createEvent,
+  createBewertung,
+  createClub,
+} = require('../controllers/kaffeehaus');
 
 const router = express.Router();
 
-// Routs
+// Routes
 // z.B. router.get('/cars', getCars);
 router.get('/events', getEvents);
+router.post('/events', createEvent);
+router.post('/club', createClub);
+router.post('/bewertung', createBewertung);
 
 // Export router
 module.exports = router;
