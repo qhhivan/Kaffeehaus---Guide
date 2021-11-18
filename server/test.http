@@ -1,11 +1,10 @@
-# All Events
+# GET
 GET http://localhost:3000/events
 
 ################################
 GET http://localhost:3000/club
 
-###
-DELETE http://localhost:3000/event/5
+### CREATE
 
 ###
 # Create Event
@@ -26,7 +25,40 @@ POST http://localhost:3000/bewertung
 Content-Type: application/json
 
 {
-    "stars": 4,
+    "stars": 3,
     "description": "Test Bewertung",
     "lokal_id": 2
 }
+###
+
+POST http://localhost:3000/club
+Content-Type: application/json
+
+{
+    "address":"TEST", 
+    "website":"TEST", 
+    "music":"TEST", 
+    "phone_number":"0123456789", 
+    "price":"$$$", 
+    "name":"TEST", 
+    "opening_hours":"12:00 - 06:00"
+}
+
+### UPDATE
+
+# Nein
+PATCH http://localhost:3000/events/1
+Content-Type: application/json
+
+{
+    "title": "Test Event - Loco",
+    "description": "Happyhour",
+    "time": "20:00",
+    "date": "06.11.2021",
+    "lokal_id": 5
+}
+
+### -- DELETE
+DELETE http://localhost:3000/event/9
+###
+DELETE http://localhost:3000/club/10

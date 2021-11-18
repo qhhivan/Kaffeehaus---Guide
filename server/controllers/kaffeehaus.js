@@ -55,7 +55,7 @@ const updateClub = asyncHandler(async (req, res) => {
 
 // Update Events
 const updateEvent = asyncHandler(async (req, res) => {
-  const { code, data } = await kaffeehaus.updateEvent(req.body);
+  const { code, data } = await kaffeehaus.updateEvent(req.params.id, req.body);
   res.status(code).json(data);
 });
 // ----------------------
@@ -63,9 +63,9 @@ const updateEvent = asyncHandler(async (req, res) => {
 // DELETE
 // Delete Club
 const deleteClub = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  // const { id } = req.params;
 
-  const { code, data } = await kaffeehaus.deleteClub({ id });
+  const { code, data } = await kaffeehaus.deleteClub(req.params.id);
   res.status(code).json(data);
 });
 

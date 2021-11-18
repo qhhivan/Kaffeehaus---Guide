@@ -18,7 +18,7 @@ async function getEvents() {
   try {
     // Output von einem Select in einer Variable/ Objekt speicher
     const { rows } = await db.query(
-      'SELECT name, * FROM events JOIN lokal l ON events.lokal_id = l.id',
+      'SELECT l.name, title, description, time, date, lokal_id, events.id as event_id FROM events JOIN lokal l ON events.lokal_id = l.id order by events.id',
     );
     //   Return Statuscode und die daten
     return { code: 200, data: rows };
@@ -155,15 +155,15 @@ async function updateClub(id, newClub) {
 
 async function updateEvent(id, newEvent) {
   try {
-    const { club } = await db.query('Select * from lokal where id = $1', [id]);
+    // const { club } = await db.query('Select * from lokal where id = $1', [id]);
 
-    // Wenn es dieses Lokal nicht gibt soll eine Fehlermeldung ausgegeben werden
-    if (club[0] === undefined) {
-      return {
-        code: 404,
-        data: 'Not found',
-      };
-    }
+    // // Wenn es dieses Lokal nicht gibt soll eine Fehlermeldung ausgegeben werden
+    // if (club[0] === undefined) {
+    //   return {
+    //     code: 404,
+    //     data: 'Not found',
+    //   };
+    // }
     await db.query(
       'update events set (title, description, time, date, music) = ($1, $2, $3, $4, $5) where id = $6',
       [
@@ -182,21 +182,17 @@ async function updateEvent(id, newEvent) {
 }
 
 // Delete Club
-// Nicht Fertig
-
 async function deleteClub(id) {
-  const { club } = db.query('Select * from club where id = $1', [id]);
+  // const { club } = db.query('Select * from club where id = $1', [id]);
 
-  if (club[0] === undefined) {
-    return { code: 404, data: 'Not Found' };
-  }
+  // if (club[0] === undefined) {
+  //   return { code: 404, data: 'Not Found' };
+  // }
   await db.query('DELETE from lokal where id = $1;', [id]);
   return { code: 200, data: 'Löschen Erfolgreich' };
 }
 
 // Delete Events
-// Nicht Fertig
-
 async function deleteEvent(id) {
   try {
     // DAS MUSS IN EINE EIGENE FUNKTION

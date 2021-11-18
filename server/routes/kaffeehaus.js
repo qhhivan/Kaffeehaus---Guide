@@ -26,8 +26,8 @@ router.post('/club', createClub);
 router.post('/bewertung', createBewertung);
 
 // UPDATE
-router.patch('/club', updateClub);
-router.patch('/event', updateEvent);
+router.patch('/club/:id', updateClub);
+router.patch('/event/:id', updateEvent);
 
 // DELETE
 router.delete('/club/:id', deleteClub);
