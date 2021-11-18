@@ -1,6 +1,12 @@
 # All Events
 GET http://localhost:3000/events
 
+################################
+GET http://localhost:3000/club
+
+###
+DELETE http://localhost:3000/event/5
+
 ###
 # Create Event
 POST http://localhost:3000/events

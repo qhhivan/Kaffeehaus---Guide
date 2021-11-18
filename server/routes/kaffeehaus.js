@@ -1,29 +1,37 @@
 const express = require('express');
 // Controllers Importieren
 const {
+  getClubs,
   getEvents,
+  getClub,
+  createClub,
   createEvent,
   createBewertung,
-  createClub,
+  updateClub,
+  updateEvent,
+  deleteEvent,
+  deleteClub,
 } = require('../controllers/kaffeehaus');
 
 const router = express.Router();
 
-// Routes
-// z.B. router.get('/cars', getCars);
+// GET
+router.get('/clubs', getClubs);
+router.get('/club', getClub);
 router.get('/events', getEvents);
+
+// POST
 router.post('/events', createEvent);
 router.post('/club', createClub);
 router.post('/bewertung', createBewertung);
 
-// Alle Lokale und deren avg Bewertungen
-// Alle Infos (Infos, Events, Bewertungen) über ein Lokal
+// UPDATE
+router.patch('/club', updateClub);
+router.patch('/event', updateEvent);
 
-// Update Club
-// Update Events
-
-// Delete Club
-// Delete Events
+// DELETE
+router.delete('/club/:id', deleteClub);
+router.delete('/event/:id', deleteEvent);
 
 // Export router
 module.exports = router;

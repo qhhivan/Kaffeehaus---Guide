@@ -3,6 +3,15 @@ const db = require('../db/index.js');
 
 // USER
 // Alle Lokale und deren avg Bewertungen
+// Nicht Fertig
+async function getClubs() {
+  try {
+    const { rows } = await db.query('Select * from lokale');
+    return { code: 200, data: rows };
+  } catch (error) {
+    return { status: 500, data: error.message };
+  }
+}
 
 // Alle Events und den Lokalnamen
 async function getEvents() {
@@ -19,10 +28,29 @@ async function getEvents() {
 }
 
 // Alle Infos (Infos, Events, Bewertungen) über ein Lokal
+// Nicht Fertig
+
+async function getClub() {
+  try {
+    const bewertungen = await db.query(
+      'select * from bewertungen where lokal_id = 2',
+    ).rows;
+    const events = await await db.query(
+      ' select * from events where lokal_id = 2',
+    ).rows;
+    const club = await await (
+      await db.query('select * from lokal where lokal.id = 2')
+    ).rows;
+    // FEHLER
+    return { code: 200, data: { club, events, bewertungen } };
+  } catch (error) {
+    return { code: 500, data: error.message };
+  }
+}
 
 // ADMIN
 // Insert Club
-// insert into lokal (address, website, music, phone_number, price, name, opening_hours)
+// Nicht Fertig
 
 async function createClub(club) {
   try {
@@ -51,13 +79,20 @@ async function createClub(club) {
 }
 
 // Insert Event
-// insert into events (title, description, time, date, lokal_id)
+// Nicht Fertig
 
 async function createEvent(event) {
   try {
     await db.query(
-      'insert into events (title, description, time, date, lokal_id)  values ($1, $2, $3, $4, $5)',
-      [event.title, event.description, event.time, event.date, event.lokal_id],
+      'insert into events (title, description, time, date, lokal_id, music)  values ($1, $2, $3, $4, $5, $6)',
+      [
+        event.title,
+        event.description,
+        event.time,
+        event.date,
+        event.lokal_id,
+        event.music,
+      ],
     );
 
     return { code: 200, data: 'Erfolgreich Hinzugefügt' };
@@ -67,7 +102,8 @@ async function createEvent(event) {
 }
 
 // Inster Bewertung
-// insert into bewertungen (stars, description, lokal_id)
+// Nicht Fertig
+
 async function createBewertung(bewertung) {
   try {
     await db.query(
@@ -82,6 +118,8 @@ async function createBewertung(bewertung) {
 }
 
 // Update Club
+// Nicht Fertig
+
 async function updateClub(id, newClub) {
   try {
     const { club } = await db.query('Select * from lokal where id = $1', [id]);
@@ -106,20 +144,92 @@ async function updateClub(id, newClub) {
         id,
       ],
     );
+    return { code: 200, data: 'Erfolgreich Hinzugefügt' };
   } catch (error) {
     return { code: 500, data: error.message };
   }
 }
+
 // Update Events
+// Nicht Fertig
+
+async function updateEvent(id, newEvent) {
+  try {
+    const { club } = await db.query('Select * from lokal where id = $1', [id]);
+
+    // Wenn es dieses Lokal nicht gibt soll eine Fehlermeldung ausgegeben werden
+    if (club[0] === undefined) {
+      return {
+        code: 404,
+        data: 'Not found',
+      };
+    }
+    await db.query(
+      'update events set (title, description, time, date, music) = ($1, $2, $3, $4, $5) where id = $6',
+      [
+        newEvent.title,
+        newEvent.description,
+        newEvent.time,
+        newEvent.date,
+        newEvent.music,
+        id,
+      ],
+    );
+    return { code: 200, data: 'Erfolgreich Hinzugefügt' };
+  } catch (error) {
+    return { code: 500, data: error.message };
+  }
+}
 
 // Delete Club
+// Nicht Fertig
+
+async function deleteClub(id) {
+  const { club } = db.query('Select * from club where id = $1', [id]);
+
+  if (club[0] === undefined) {
+    return { code: 404, data: 'Not Found' };
+  }
+  await db.query('DELETE from lokal where id = $1;', [id]);
+  return { code: 200, data: 'Löschen Erfolgreich' };
+}
+
 // Delete Events
+// Nicht Fertig
+
+async function deleteEvent(id) {
+  try {
+    // DAS MUSS IN EINE EIGENE FUNKTION
+    // const { event } = await db.query('Select title from events where id = $1', [
+    //   id,
+    // ]);
+    // console.log(event);
+    // console.log(id);
+    // // Wenn es dieses Event nicht gibt soll eine Fehlermeldung ausgegeben werden
+    // if (event === undefined) {
+    //   return {
+    //     code: 404,
+    //     data: 'Not found',
+    //   };
+    // }
+
+    await db.query('DELETE from events where id = $1', [id]);
+    return { code: 200, data: 'Löschen Erfolgreich' };
+  } catch (error) {
+    return { code: 500, data: error.message };
+  }
+}
 
 // Export
 module.exports = {
+  getClubs,
   getEvents,
+  getClub,
   createClub,
   createEvent,
   createBewertung,
   updateClub,
+  updateEvent,
+  deleteEvent,
+  deleteClub,
 };
