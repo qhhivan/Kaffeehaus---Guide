@@ -122,17 +122,17 @@ async function createBewertung(bewertung) {
 
 async function updateClub(id, newClub) {
   try {
-    const { club } = await db.query('Select * from lokal where id = $1', [id]);
+    // const { club } = await db.query('Select * from lokal where id = $1', [id]);
 
     // Wenn es dieses Lokal nicht gibt soll eine Fehlermeldung ausgegeben werden
-    if (club[0] === undefined) {
-      return {
-        code: 404,
-        data: 'Not found',
-      };
-    }
+    // if (club[0] === undefined) {
+    //   return {
+    //     code: 404,
+    //     data: 'Not found',
+    //   };
+    // }
     await db.query(
-      'update lokal set (address, website, music, phone_number, price, opening_hours)  = ($1, $2, $3, $4, $5) where id = $6',
+      'update lokal set (address, website, music, phone_number, price, name, opening_hours)  = ($1, $2, $3, $4, $5, $6, $7) where id = $8',
       [
         newClub.address,
         newClub.website,
@@ -144,7 +144,7 @@ async function updateClub(id, newClub) {
         id,
       ],
     );
-    return { code: 200, data: 'Erfolgreich Hinzugefügt' };
+    return { code: 200, data: 'Update Erfolgreich' };
   } catch (error) {
     return { code: 500, data: error.message };
   }
@@ -175,7 +175,7 @@ async function updateEvent(id, newEvent) {
         id,
       ],
     );
-    return { code: 200, data: 'Erfolgreich Hinzugefügt' };
+    return { code: 200, data: 'Update Erfolgreich' };
   } catch (error) {
     return { code: 500, data: error.message };
   }
@@ -188,7 +188,7 @@ async function deleteClub(id) {
   // if (club[0] === undefined) {
   //   return { code: 404, data: 'Not Found' };
   // }
-  await db.query('DELETE from lokal where id = $1;', [id]);
+  await db.query('DELETE from lokal where id = $1', [id]);
   return { code: 200, data: 'Löschen Erfolgreich' };
 }
 

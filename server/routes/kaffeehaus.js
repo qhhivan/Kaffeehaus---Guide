@@ -17,21 +17,21 @@ const router = express.Router();
 
 // GET
 router.get('/clubs', getClubs);
-router.get('/club', getClub);
+router.get('/clubs/:id', getClub);
 router.get('/events', getEvents);
 
 // POST
 router.post('/events', createEvent);
-router.post('/club', createClub);
+router.post('/clubs', createClub);
 router.post('/bewertung', createBewertung);
 
 // UPDATE
-router.patch('/club/:id', updateClub);
-router.patch('/event/:id', updateEvent);
+router.patch('/clubs/:id', updateClub);
+router.patch('/events/:id', updateEvent);
 
 // DELETE
-router.delete('/club/:id', deleteClub);
-router.delete('/event/:id', deleteEvent);
+router.delete('/clubs/:id', deleteClub);
+router.delete('/events/:id', deleteEvent);
 
 // Export router
 module.exports = router;

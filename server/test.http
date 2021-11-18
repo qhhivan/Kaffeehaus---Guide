@@ -2,10 +2,9 @@
 GET http://localhost:3000/events
 
 ################################
-GET http://localhost:3000/club
+# GET http://localhost:3000/club
 
 ### CREATE
-
 ###
 # Create Event
 POST http://localhost:3000/events
@@ -31,7 +30,9 @@ Content-Type: application/json
 }
 ###
 
-POST http://localhost:3000/club
+###
+# Create Club
+POST http://localhost:3000/clubs
 Content-Type: application/json
 
 {
@@ -45,9 +46,7 @@ Content-Type: application/json
 }
 
 ### UPDATE
-
-# Nein
-PATCH http://localhost:3000/events/1
+PATCH http://localhost:3000/event/1
 Content-Type: application/json
 
 {
@@ -55,10 +54,27 @@ Content-Type: application/json
     "description": "Happyhour",
     "time": "20:00",
     "date": "06.11.2021",
-    "lokal_id": 5
+    "lokal_id": 5,
+    "music": "POP"
+}
+###
+#NEIN
+PATCH http://localhost:3000/clubs/11
+Content-Type: application/json
+
+{
+    "address":"OK", 
+    "website":"TEST", 
+    "music":"TEST", 
+    "phone_number":"0123456789", 
+    "price":"$$$", 
+    "name":"TEST", 
+    "opening_hours":"12:00 - 06:00"
 }
 
+
+
 ### -- DELETE
-DELETE http://localhost:3000/event/9
+DELETE http://localhost:3000/events/9
 ###
-DELETE http://localhost:3000/club/10
+DELETE http://localhost:3000/clubs/10

@@ -49,7 +49,7 @@ const createClub = asyncHandler(async (req, res) => {
 // UPDATE
 // Update Club
 const updateClub = asyncHandler(async (req, res) => {
-  const { code, data } = await kaffeehaus.updateClub(req.body);
+  const { code, data } = await kaffeehaus.updateClub(req.params.id, req.body);
   res.status(code).json(data);
 });
 
