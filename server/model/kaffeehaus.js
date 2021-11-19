@@ -3,10 +3,11 @@ const db = require('../db/index.js');
 
 // USER
 // Alle Lokale und deren avg Bewertungen
-// Nicht Fertig
 async function getClubs() {
   try {
-    const { rows } = await db.query('SELECT * FROM lokale');
+    const { rows } = await db.query(
+      'SELECT lokal.id, address, website, music, phone_number, price, name, opening_hours, avg(stars)FROM lokal left join bewertungen b on lokal_id = lokal.id group by lokal.id',
+    );
     return { code: 200, data: rows };
   } catch (error) {
     return { status: 500, data: error.message };
@@ -28,20 +29,20 @@ async function getEvents() {
 }
 
 // Alle Infos (Infos, Events, Bewertungen) über ein Lokal
-// Nicht Fertig
-
-async function getClub() {
+async function getClub(id) {
   try {
-    const bewertungen = await db.query(
-      'SELECT * FROM bewertungen WHERE lokal_id = 2',
+    const bewertungen = await (
+      await db.query('SELECT * FROM bewertungen WHERE lokal_id = $1', [id])
     ).rows;
-    const events = await await db.query(
-      ' SELECT * FROM events WHERE lokal_id = 2',
+    const events = await (
+      await db.query('SELECT * FROM events WHERE lokal_id = $1', [id])
     ).rows;
-    const club = await await (
-      await db.query('SELECT * FROM lokal WHERE lokal.id = 2')
+    const club = await (
+      await db.query('SELECT * FROM lokal WHERE lokal.id = $1', [id])
     ).rows;
     // FEHLER
+    console.log(events);
+    console.log(bewertungen);
     return { code: 200, data: { club, events, bewertungen } };
   } catch (error) {
     return { code: 500, data: error.message };

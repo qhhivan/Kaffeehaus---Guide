@@ -10,7 +10,7 @@ const getClubs = asyncHandler(async (req, res) => {
 
 // Alle Infos (Infos, Events, Bewertungen) über ein Lokal
 const getClub = asyncHandler(async (req, res) => {
-  const { code, data } = await kaffeehaus.getClub();
+  const { code, data } = await kaffeehaus.getClub(req.params.id);
   res.status(code).json(data);
 });
 

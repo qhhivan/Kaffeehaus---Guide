@@ -2,7 +2,10 @@
 GET http://localhost:3000/events
 
 ################################
-# GET http://localhost:3000/club
+GET http://localhost:3000/clubs/2
+################################
+GET http://localhost:3000/clubs
+
 
 ### CREATE
 ###
