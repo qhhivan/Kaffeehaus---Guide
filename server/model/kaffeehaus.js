@@ -14,15 +14,25 @@ async function getClubs() {
   }
 }
 
+async function getEvent(id) {
+  try {
+    const { rows } = await db.query('SELECT * from events where id = $1', [id]);
+    return { code: 200, data: rows };
+  } catch (error) {
+    return { status: 500, data: error.message };
+  }
+}
+
 // Alle Events und den Lokalnamen
 async function getEvents() {
   try {
+    // ICH SOLL NUR ROWS ZUEÜCKGEBEN
     // Output von einem SELECT in einer Variable/ Objekt speicher
     const { rows } = await db.query(
       'SELECT l.name, title, description, time, date, lokal_id, events.id as event_id FROM events JOIN lokal l ON events.lokal_id = l.id order by events.id',
     );
     //   Return Statuscode und die daten
-    return { code: 200, data: rows };
+    return { rows };
   } catch (error) {
     return { code: 500, data: error.message };
   }
@@ -216,6 +226,7 @@ module.exports = {
   getClubs,
   getEvents,
   getClub,
+  getEvent,
   createClub,
   createEvent,
   createBewertung,
