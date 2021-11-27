@@ -40,6 +40,15 @@ async function getClub(id) {
   return rows;
 }
 
+// Inster Bewertung
+async function createBewertung(bewertung) {
+  await db.query(
+    'INSERT INTO bewertungen (stars, description, lokal_id)  values ($1, $2, $3)',
+    [bewertung.stars, bewertung.description, bewertung.lokal_id],
+  );
+  return 'Erfolgreich Hinzugefügt';
+}
+
 // ADMIN
 
 // Insert Club
@@ -65,15 +74,6 @@ async function createEvent(title, description, time, date, lokal_id, music) {
   await db.query(
     'INSERT INTO events (title, description, time, date, lokal_id, music)  values ($1, $2, $3, $4, $5, $6)',
     [title, description, time, date, lokal_id, music],
-  );
-  return 'Erfolgreich Hinzugefügt';
-}
-
-// Inster Bewertung
-async function createBewertung(bewertung) {
-  await db.query(
-    'INSERT INTO bewertungen (stars, description, lokal_id)  values ($1, $2, $3)',
-    [bewertung.stars, bewertung.description, bewertung.lokal_id],
   );
   return 'Erfolgreich Hinzugefügt';
 }
