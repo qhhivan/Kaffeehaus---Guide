@@ -20,6 +20,7 @@
     <!-- Es werden alle Clubs (Name, Address, Preisklasse, Öffnungszeiten) angezeigt sortiert nach bewertung -->
 
     <!-- Ganz unten soll eine Navbar sein wo man Zwischen Events und Clubs switschen kann -->
+    
   </div>
 </template>
 
