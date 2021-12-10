@@ -1,20 +1,23 @@
 <template>
   <v-container>
     <v-bottom-navigation fixed app>
-      <v-btn>
-        <span>Recents</span>
+      <v-btn :to="'/events'">
+        <span>Events</span>
         <v-icon>mdi-history</v-icon>
       </v-btn>
 
-      <v-btn>
-        <span>Favorites</span>
-        <v-icon>mdi-heart</v-icon>
+      <v-btn disabled>
+        <span>Logo</span>
+        <v-icon>LOGO</v-icon>
       </v-btn>
 
-      <v-btn>
-        <span>Nearby</span>
+      <v-btn :to="'/clubs'">
+        <span>Club</span>
         <v-icon>mdi-map-marker</v-icon>
       </v-btn>
     </v-bottom-navigation>
   </v-container>
 </template>
+<script>
+
+</script>

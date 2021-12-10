@@ -1,8 +1,9 @@
+const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
-const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
+
 // Routes
 const routes = require('./routes/kaffeehaus');
 // Colors und so einbinden
@@ -13,6 +14,9 @@ require('dotenv').config();
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 
 const app = express();
+
+// CORS
+app.use(cors());
 
 app.use(morgan('dev'));
 
@@ -27,9 +31,6 @@ app.use('/', routes);
 app.use(notFoundHandler);
 
 app.use(errorHandler);
-
-// CORS
-app.use(cors());
 
 const PORT = process.env.PORT ?? 5000;
 
