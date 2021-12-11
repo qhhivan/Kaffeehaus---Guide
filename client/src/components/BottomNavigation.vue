@@ -17,23 +17,25 @@
         <v-icon>mdi-map-marker</v-icon>
       </v-btn>
     </v-bottom-navigation> -->
-  <v-bottom-navigation background-color="blue-grey" shift fixed>
+  <v-bottom-navigation
+    background-color="blue-grey"
+    fixed
+    class="pa-3"
+    height="70"
+  >
     <v-btn :to="'/events'">
-      <span>Events</span>
-
-      <v-icon>mdi-television-play</v-icon>
+      <img src="../../public/img/calendar.png" width="35" height="35" />
     </v-btn>
 
     <!-- LOGO -->
     <div>
-      <v-icon>mdi-music-note</v-icon>
+      <img src="../../public/img/Logo.png" alt="Logo" width="85" height="85" />
     </div>
 
     <v-btn :to="'/clubs'">
-      <span>Club</span>
+      <!-- <span>Club</span> -->
 
-      <v-icon>mdi-book</v-icon>
+      <img src="../../public/img/glass-cocktail.png" width="35" height="35" />
     </v-btn>
   </v-bottom-navigation>
 </template>
-<script></script>
