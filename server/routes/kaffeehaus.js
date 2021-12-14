@@ -11,6 +11,7 @@ const {
   updateEvent,
   deleteEvent,
   deleteClub,
+  getBewertungen,
 } = require('../controllers/kaffeehaus');
 
 const router = express.Router();
@@ -19,6 +20,7 @@ const router = express.Router();
 router.get('/clubs', getClubs);
 router.get('/clubs/:id', getClub);
 router.get('/events', getEvents);
+router.get('/bewertungen', getBewertungen);
 
 // POST
 router.post('/events', createEvent);

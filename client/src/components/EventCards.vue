@@ -17,7 +17,7 @@
           <!-- <v-btn text>{{ e.name }}</v-btn> -->
 
           <!-- DIALOG -->
-          <v-dialog v-model="dialog" persistent max-width="600px">
+          <v-dialog v-model="dialog" persistent max-width="600px" >
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" v-on="on" text @click="filterClub(e.name)">
                 {{ e.name }}

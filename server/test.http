@@ -6,6 +6,8 @@ GET http://localhost:3000/clubs/4
 ################################
 GET http://localhost:3000/clubs
 
+################################
+GET http://localhost:3000/bewertungen
 
 ### CREATE
 ###

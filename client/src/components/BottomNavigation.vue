@@ -23,16 +23,16 @@
     class="pa-3"
     height="70"
   >
-    <v-btn :to="'/events'">
+    <v-btn :to="'/events'" class="blue-grey">
       <img src="../../public/img/calendar.png" width="35" height="35" />
     </v-btn>
 
     <!-- LOGO -->
-    <div>
+    <div class="blue-grey">
       <img src="../../public/img/Logo.png" alt="Logo" width="85" height="85" />
     </div>
 
-    <v-btn :to="'/clubs'">
+    <v-btn :to="'/clubs'" class="blue-grey">
       <!-- <span>Club</span> -->
 
       <img src="../../public/img/glass-cocktail.png" width="35" height="35" />

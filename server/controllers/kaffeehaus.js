@@ -9,6 +9,11 @@ const getClubs = asyncHandler(async (req, res) => {
   res.status(200).json(await kaffeehaus.getClubs());
 });
 
+// Alle Bewertungen
+const getBewertungen = asyncHandler(async (req, res) => {
+  res.status(200).json(await kaffeehaus.getBewertungen());
+});
+
 // Alle Infos (Infos, Events, Bewertungen) über ein Lokal
 const getClub = asyncHandler(async (req, res) => {
   const rows = await kaffeehaus.getClub(req.params.id);
@@ -142,6 +147,7 @@ module.exports = {
   getClubs,
   getEvents,
   getClub,
+  getBewertungen,
   createClub,
   createEvent,
   createBewertung,

@@ -38,24 +38,29 @@
     <!-- </v-app-bar> -->
 
     <v-main>
-      <router-view :events="allEvents" :clubs="allClubs" />
+      <router-view
+        :events="allEvents"
+        :clubs="allClubs"
+        :bewertungen="allBewertungen"
+        class="mb-15"
+      />
       <!-- <v-col cols="12" v-for="e in allEvents" v-bind:key="e.id"> -->
-        <!-- <v-card color="#385F73" dark> -->
-          <!-- Club Name -->
-          <!-- <v-card-title class="text-h5">{{ e.title }}</v-card-title> -->
+      <!-- <v-card color="#385F73" dark> -->
+      <!-- Club Name -->
+      <!-- <v-card-title class="text-h5">{{ e.title }}</v-card-title> -->
 
-          <!-- Datum und Uhrzeit -->
-          <!-- <v-card-subtitle>{{ e.date }} {{ e.time }}</v-card-subtitle> -->
+      <!-- Datum und Uhrzeit -->
+      <!-- <v-card-subtitle>{{ e.date }} {{ e.time }}</v-card-subtitle> -->
 
-          <!-- Club beschreibung -->
-          <!-- <v-card-subtitle>{{ e.description }}</v-card-subtitle> -->
+      <!-- Club beschreibung -->
+      <!-- <v-card-subtitle>{{ e.description }}</v-card-subtitle> -->
 
-          <!-- Club Name -->
-          <!-- <v-card-actions> -->
-            <!-- Wenn man hier auf den Club drückt wird man weitergeleitet zu den Club Infos -->
-            <!-- <v-btn text>{{ e.name }}</v-btn> -->
-          <!-- </v-card-actions> -->
-        <!-- </v-card> -->
+      <!-- Club Name -->
+      <!-- <v-card-actions> -->
+      <!-- Wenn man hier auf den Club drückt wird man weitergeleitet zu den Club Infos -->
+      <!-- <v-btn text>{{ e.name }}</v-btn> -->
+      <!-- </v-card-actions> -->
+      <!-- </v-card> -->
       <!-- </v-col> -->
     </v-main>
 
@@ -79,6 +84,7 @@ export default {
     allClubs: [],
     oneClub: [],
     allEvents: [],
+    allBewertungen: [],
   }),
   methods: {
     // Das mit dem ENV machen wie in PWA Übung 2
@@ -116,11 +122,23 @@ export default {
       }
     },
     // getEvent,
+
+    // getBewertungen,
+    async getBewertungen() {
+      try {
+        const { data } = await axios.get(`http://localhost:3000/bewertungen`);
+        this.allBewertungen = data;
+        console.log(this.allBewertungen);
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
   },
 
   created() {
     this.getClubs();
     this.getEvents();
+    this.getBewertungen();
   },
 };
 </script>

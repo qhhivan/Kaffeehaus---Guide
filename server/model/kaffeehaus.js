@@ -23,6 +23,13 @@ async function getEvents() {
   );
   return rows;
 }
+// Alle Bewertungen
+async function getBewertungen() {
+  const { rows } = await db.query(
+    'SELECT * FROM bewertungen',
+  );
+  return rows;
+}
 
 // Alle Infos (Infos, Events, Bewertungen) über ein Lokal
 async function getClub(id) {
@@ -130,6 +137,7 @@ module.exports = {
   getEvents,
   getClub,
   getEvent,
+  getBewertungen,
   createClub,
   createEvent,
   createBewertung,
