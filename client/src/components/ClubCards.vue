@@ -14,7 +14,7 @@
 
         <!-- Bewertung -->
 
-        <v-dialog v-model="dialog" persistent max-width="600px">
+        <v-dialog transition="dialog-top-transition" persistent max-width="600px">
           <template v-slot:activator="{ on, attrs }">
             <!-- Den Club Filtern -->
             <div v-bind="attrs" v-on="on" text @click="filterBewertung(c.id)">
@@ -31,16 +31,21 @@
               ></v-rating>
             </div>
           </template>
+          <template v-slot:default="dialog">
+
           <!--  -->
           <!-- Überschrift -->
 
           <v-card>
+            <v-btn icon v-bind="attrs" v-on="on" class="float-right mb-4 ml-10" @click="dialog.value = false" rounded>
+              <v-icon>{{mdiCloseThick}}</v-icon>
+            </v-btn>
             <v-card-title>
               <span class="text-h7 mb-5">Bewertungen</span>
             </v-card-title>
             <v-card-text>
               <!-- CARD Bewertungen -->
-              <v-card v-for="b in ClubsBewertungen" v-bind:key="b.id" class="my-auto">
+              <v-card v-for="b in ClubsBewertungen" v-bind:key="b.id">
                 <!-- Rating -->
                 <v-row
                   ><v-rating
@@ -61,9 +66,9 @@
                 </v-row>
               </v-card>
             </v-card-text>
+            <v-spacer></v-spacer>
           </v-card>
-          <v-spacer></v-spacer>
-          <v-btn color="#385F73" text> Close </v-btn>
+          </template>
         </v-dialog>
         <!--  -->
 
@@ -87,6 +92,7 @@
 </template>
 
 <script>
+import { mdiCloseThick } from '@mdi/js';
 export default {
   props: {
     events: Array,
@@ -97,6 +103,7 @@ export default {
     return {
       ClubsBewertungen: '',
       dialog: false,
+      mdiCloseThick: mdiCloseThick,
     };
   },
   methods: {

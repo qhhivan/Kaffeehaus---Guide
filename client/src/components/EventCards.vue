@@ -17,77 +17,81 @@
           <!-- <v-btn text>{{ e.name }}</v-btn> -->
 
           <!-- DIALOG -->
-          <v-dialog v-model="dialog" persistent max-width="600px" >
+          <v-dialog transition="dialog-top-transition" persistent max-width="600px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" v-on="on" text @click="filterClub(e.name)">
                 {{ e.name }}
               </v-btn>
             </template>
-            <!--  -->
-            <v-card>
-              <v-card-title>
-                <span class="text-h5">{{ club.name }}</span>
-              </v-card-title>
-              <v-card-text>
-                <v-container>
-                  <!--  -->
+            <template v-slot:default="dialog">
+              <!--  -->
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">{{ club.name }}</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <!--  -->
 
-                  <!-- Rating -->
-                  <v-row
-                    ><v-rating
-                      :value="Math.round(club.avg)"
-                      color="amber"
-                      dense
-                      half-increments
-                      readonly
-                      size="30"
-                    ></v-rating
-                  ></v-row>
+                    <!-- Rating -->
+                    <v-row
+                      ><v-rating
+                        :value="Math.round(club.avg)"
+                        color="amber"
+                        dense
+                        half-increments
+                        readonly
+                        size="30"
+                      ></v-rating
+                    ></v-row>
 
-                  <v-row class="my-4 text-subtitle-1">
-                    <span class="font-weight-bold">Address</span>
+                    <v-row class="my-4 text-subtitle-1">
+                      <span class="font-weight-bold">Address</span>
 
-                    <v-card-text>{{ club.address }}</v-card-text>
-                  </v-row>
+                      <v-card-text>{{ club.address }}</v-card-text>
+                    </v-row>
 
-                  <!-- Öffnungszeiten -->
-                  <v-row class="my-4 text-subtitle-1">
-                    <span class="font-weight-bold">Öffnungszeiten: </span>
-                    {{ club.opening_hours }}
-                  </v-row>
+                    <!-- Öffnungszeiten -->
+                    <v-row class="my-4 text-subtitle-1">
+                      <span class="font-weight-bold">Öffnungszeiten: </span>
+                      {{ club.opening_hours }}
+                    </v-row>
 
-                  <!-- Musik -->
-                  <v-row class="my-4 text-subtitle-1">
-                    <span class="font-weight-bold">Musik:</span>
-                    <v-card-text>{{ club.music }}</v-card-text>
-                  </v-row>
+                    <!-- Musik -->
+                    <v-row class="my-4 text-subtitle-1">
+                      <span class="font-weight-bold">Musik:</span>
+                      <v-card-text>{{ club.music }}</v-card-text>
+                    </v-row>
 
-                  <!-- Price -->
-                  <v-row class="my-4 text-subtitle-1">
-                    <span class="font-weight-bold">Preis:</span>
-                    {{ club.price }}
-                  </v-row>
+                    <!-- Price -->
+                    <v-row class="my-4 text-subtitle-1">
+                      <span class="font-weight-bold">Preis:</span>
+                      {{ club.price }}
+                    </v-row>
 
-                  <!-- Telefonnummer -->
-                  <v-row class="my-4 text-subtitle-1">
-                    <span class="font-weight-bold">Tel.</span>
-                    {{ club.phone_number }}
-                  </v-row>
+                    <!-- Telefonnummer -->
+                    <v-row class="my-4 text-subtitle-1">
+                      <span class="font-weight-bold">Tel.</span>
+                      {{ club.phone_number }}
+                    </v-row>
 
-                  <!-- WEBSITE -->
-                  <v-row class="my-4 text-subtitle-1">
-                    <span class="font-weight-bold">Webseite</span>
-                  </v-row>
-                  <v-row>
-                    {{ club.website }}
-                  </v-row>
-                </v-container>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="#385F73" text> Close </v-btn>
-              </v-card-actions>
-            </v-card>
+                    <!-- WEBSITE -->
+                    <v-row class="my-4 text-subtitle-1">
+                      <span class="font-weight-bold">Webseite</span>
+                    </v-row>
+                    <v-row>
+                      {{ club.website }}
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="#385F73" text @click="dialog.value = false">
+                    Close
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </template>
           </v-dialog>
         </v-card-actions>
       </v-card>
