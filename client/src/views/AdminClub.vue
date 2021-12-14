@@ -94,7 +94,6 @@
                       required
                       :value="c.address"
                       v-model="c.address"
-
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
@@ -143,11 +142,7 @@
               <v-btn color="blue darken-1" text @click="dialog.value = false">
                 Close
               </v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="updateClub(c)"
-              >
+              <v-btn color="blue darken-1" text @click="updateClub(c)">
                 Save
               </v-btn>
             </v-card-actions>
@@ -159,7 +154,6 @@
 </template>
 
 <script>
-import { mdiCloseThick } from '@mdi/js';
 export default {
   props: {
     events: Array,
@@ -170,29 +164,15 @@ export default {
     return {
       ClubsBewertungen: '',
       dialog: false,
-      mdiCloseThick: mdiCloseThick,
-
     };
   },
   methods: {
-    filterBewertung(id) {
-      // Der Club wird gefiltert
-
-      // console.log(id);
-      // console.log(this.bewertungen);
-      this.ClubsBewertungen = this.bewertungen.filter((b) => b.lokal_id == id);
-      console.log(this.ClubsBewertungen);
-      // console.log(Math.round(this.club.avg));
-    },
     deleteClub(id) {
       console.log(`Delete Club ${id}`);
     },
     updateClub(club) {
       console.log(club);
     },
-
   },
 };
 </script>
-
-<style lang="scss" scoped></style>

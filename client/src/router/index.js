@@ -21,8 +21,13 @@ const routes = [
   },
   {
     path: '/admin/clubs',
-    name: 'Admin',
+    name: 'AdminClub',
     component: () => import('../views/AdminClub.vue'),
+  },
+  {
+    path: '/admin/events',
+    name: 'AdminEvent',
+    component: () => import('../views/AdminEvent.vue'),
   },
   {
     path: '/events',
