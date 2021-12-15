@@ -32,21 +32,15 @@ const getEvents = asyncHandler(async (req, res) => {
 // INSERT
 // Create Events
 const createEvent = asyncHandler(async (req, res) => {
-  const { title, description, time, date, lokalId, music } = req.body;
-  if (!title || !description || !time || !date || !lokalId || !music) {
+  const { title, description, time, date, lokalId } = req.body;
+  console.log(!title);
+  if (!title || !description || !time || !date || !lokalId) {
     res.status(400).send('One or more properties missing');
   } else {
     res
       .status(201)
       .json(
-        await kaffeehaus.createEvent(
-          title,
-          description,
-          time,
-          date,
-          lokalId,
-          music,
-        ),
+        await kaffeehaus.createEvent(title, description, time, date, lokalId),
       );
   }
 });
@@ -71,25 +65,13 @@ const createClub = asyncHandler(async (req, res) => {
   ) {
     res.status(400).send('One or more properties missing');
   }
-  if (price.length > 3) {
-    res.status(400).send('Price is to Long');
-  }
-  const rows = await kaffeehaus.getClub({ name });
+  // if (price.length > 3) {
+  //   res.status(400).send('Price is to Long');
+  // }
+  const rows = await kaffeehaus.getClub(name);
   if (rows.length > 0) res.status(200).send(`Club ${name} already exists`);
   else {
-    res
-      .status(201)
-      .json(
-        await kaffeehaus.createClub(
-          address,
-          website,
-          music,
-          phoneNumber,
-          price,
-          name,
-          openingHours,
-        ),
-      );
+    res.status(200).json(await kaffeehaus.createClub(req.body));
   }
 });
 // ----------------------

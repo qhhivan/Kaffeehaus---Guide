@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ClubCards :clubs="clubs" :bewertungen="bewertungen"/>
+    <ClubCards :clubs="clubs" :bewertungen="bewertungen" @refresh="$emit('refresh')"/>
   </div>
 </template>
 

@@ -57,18 +57,18 @@ async function createBewertung(bewertung) {
 // ADMIN
 
 // Insert Club
-async function createClub(
-  address,
-  website,
-  music,
-  phone_number,
-  price,
-  name,
-  opening_hours,
-) {
+async function createClub(body) {
   await db.query(
     'INSERT INTO lokal (address, website, music, phone_number, price, name, opening_hours) values ($1, $2, $3, $4, $5, $6, $7)',
-    [address, website, music, phone_number, price, name, opening_hours],
+    [
+      body.address,
+      body.website,
+      body.music,
+      body.phoneNumber,
+      body.price,
+      body.name,
+      body.openingHours,
+    ],
   );
   return 'Erfolgreich Hinzugefügt';
 }
@@ -77,7 +77,7 @@ async function createClub(
 async function createEvent(title, description, time, date, lokal_id) {
   console.log(title);
   await db.query(
-    'INSERT INTO events (title, description, time, date, lokal_id)  values ($1, $2, $3, $4, $5, $6)',
+    'INSERT INTO events (title, description, time, date, lokal_id)  values ($1, $2, $3, $4, $5)',
     [title, description, time, date, lokal_id],
   );
   return 'Erfolgreich Hinzugefügt';

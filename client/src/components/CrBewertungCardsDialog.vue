@@ -106,7 +106,7 @@ export default {
           description: beschreibung,
           lokal_id: lokalId,
         });
-        return true;
+        this.$emit('refresh')
       } catch (error) {
         console.log(error.message);
       }

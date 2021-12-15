@@ -6,6 +6,7 @@
         :clubs="allClubs"
         :bewertungen="allBewertungen"
         class="mb-15"
+        @refresh="getBewertungen"
       />
     </v-main>
 

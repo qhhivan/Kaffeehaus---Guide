@@ -42,7 +42,7 @@
 
         <!-- Bewertung erstellen -->
         <v-card-actions>
-          <CrBewertungCardsDialog :c="c" />
+          <CrBewertungCardsDialog :c="c" @refresh="$emit('refresh')" />
         </v-card-actions>
       </v-card>
     </v-col>

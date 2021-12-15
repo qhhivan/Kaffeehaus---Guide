@@ -45,8 +45,8 @@ Content-Type: application/json
     "website":"TEST", 
     "music":"TEST", 
     "phoneNumber":"0123456789", 
-    "price":"$$$", 
-    "name":"TESfdT", 
+    "price":"$$", 
+    "name":"HAH", 
     "openingHours":"12:00 - 06:00"
 }
 
