@@ -22,14 +22,20 @@
 
             <v-row>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field
+                <!-- <v-text-field
                   label="Bewerte von 0-5 Sternen"
                   required
                   hide-details
                   single-line
                   type="number"
                   v-model="bewertungStars"
-                ></v-text-field>
+                ></v-text-field> -->
+                <v-select
+                  v-model="bewertungStars"
+                  :items="[1,2,3,4,5]"
+                  label="Bewerte von 1-5 Sternen"
+                  required
+                ></v-select>
               </v-col>
               <!-- Bewertung erstellen - Rating  ENDE-->
 
@@ -105,8 +111,6 @@ export default {
         console.log(error.message);
       }
     },
-
-    
   },
 };
 </script>
