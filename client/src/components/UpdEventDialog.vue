@@ -11,9 +11,12 @@
 
           <!-- Event Beschreibung -->
           <v-card-subtitle>Beschreibung:{{ e.description }}</v-card-subtitle>
-          <v-btn readonly>
-            {{ e.name }}
-          </v-btn>
+
+          <v-row
+            ><v-btn readonly class="ml-3">
+              {{ e.name }}
+            </v-btn></v-row
+          >
         </v-card>
       </div>
       <!-- Dialog Card Ende -->
@@ -87,6 +90,9 @@
         <!-- Close/Save -->
         <v-card-actions>
           <v-spacer></v-spacer>
+
+          <v-btn color="error" @click="deleteEvent(e.event_id)" text> Delete </v-btn>
+
           <!-- Close -->
           <v-btn color="blue darken-1" text @click="dialog.value = false">
             Close
@@ -104,6 +110,9 @@
 
 <script>
 export default {
+  props: {
+    e: Object,
+  },
   data() {
     return {
       dialog: false,
@@ -112,6 +121,10 @@ export default {
   methods: {
     updateClub(event) {
       console.log(event);
+    },
+    deleteEvent(id) {
+      this.dialog = false;
+      console.log(`Delete Event ${id}`);
     },
   },
 };
