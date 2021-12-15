@@ -1,42 +1,5 @@
 <template>
   <v-app>
-    <!--  -->
-    <!-- LOGO -->
-    <!--  -->
-
-    <!-- <v-app-bar app color="primary" dark> -->
-    <!-- <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn> -->
-    <!-- </v-app-bar> -->
-
     <v-main>
       <router-view
         :events="allEvents"
@@ -44,24 +7,6 @@
         :bewertungen="allBewertungen"
         class="mb-15"
       />
-      <!-- <v-col cols="12" v-for="e in allEvents" v-bind:key="e.id"> -->
-      <!-- <v-card color="#385F73" dark> -->
-      <!-- Club Name -->
-      <!-- <v-card-title class="text-h5">{{ e.title }}</v-card-title> -->
-
-      <!-- Datum und Uhrzeit -->
-      <!-- <v-card-subtitle>{{ e.date }} {{ e.time }}</v-card-subtitle> -->
-
-      <!-- Club beschreibung -->
-      <!-- <v-card-subtitle>{{ e.description }}</v-card-subtitle> -->
-
-      <!-- Club Name -->
-      <!-- <v-card-actions> -->
-      <!-- Wenn man hier auf den Club drückt wird man weitergeleitet zu den Club Infos -->
-      <!-- <v-btn text>{{ e.name }}</v-btn> -->
-      <!-- </v-card-actions> -->
-      <!-- </v-card> -->
-      <!-- </v-col> -->
     </v-main>
 
     <BottomNavigation />

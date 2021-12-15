@@ -5,7 +5,9 @@
 </template>
 
 <script>
+// Import Components
 import EventCards from '@/components/EventCards.vue';
+
 export default {
   props: {
     events: {
@@ -15,17 +17,9 @@ export default {
       type: Array,
     },
   },
-  data() {
-    return {
-      dialog: false,
-      club: [],
-    };
-  },
   components: {
     EventCards,
   },
   
 };
 </script>
-
-<style lang="scss" scoped></style>

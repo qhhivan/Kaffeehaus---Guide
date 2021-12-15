@@ -1,10 +1,7 @@
 <template>
   <div>
     <!-- Filter nach Preisklasse -->
-
     <v-toolbar dense elevation="4" color="red" class="pb-10" fixed>
-      <!-- SELECT DER Preisklasse -->
-
       <v-select
         v-model="preisklasse"
         :items="preisklassen"
@@ -13,8 +10,9 @@
         @change="filterPreisklasse(preisklasse)"
       ></v-select>
     </v-toolbar>
+    <!-- ENDE -->
 
-    <!--  -->
+    <!-- CLUB CARD -->
     <v-col cols="12" v-for="c in filterClubs" v-bind:key="c.id">
       <v-card color="#385F73" dark>
         <!-- Club Name -->
@@ -28,16 +26,14 @@
         </v-card-subtitle>
 
         <!-- Bewertung -->
-
         <v-dialog
           transition="dialog-top-transition"
           persistent
           max-width="600px"
         >
+          <!-- Wenn man auf diese clickt werden einem alle Bewertungen angezeigt -->
           <template v-slot:activator="{ on, attrs }">
-            <!-- Den Club Filtern -->
             <div v-bind="attrs" v-on="on" text @click="filterBewertung(c.id)">
-              <!-- onclick sollen alle Bewertungen angezeigt werden -->
               <span class="ml-4">Bewertungen</span>
               <v-rating
                 :value="Math.round(c.avg)"
@@ -50,11 +46,12 @@
               ></v-rating>
             </div>
           </template>
-          <template v-slot:default="dialog">
-            <!--  -->
-            <!-- Überschrift -->
+          <!-- ENDE -->
 
+          <!-- Content -->
+          <template v-slot:default="dialog">
             <v-card>
+              <!-- Close Button -->
               <v-btn
                 icon
                 v-bind="attrs"
@@ -65,13 +62,18 @@
               >
                 <v-icon>{{ mdiCloseThick }}</v-icon>
               </v-btn>
+              <!-- ENDE -->
+
+              <!-- Bewertungen - Überschrift -->
               <v-card-title>
                 <span class="text-h7 mb-5">Bewertungen</span>
               </v-card-title>
+              <!-- ENDE -->
+
+              <!-- Bewertungen - Body -->
               <v-card-text>
-                <!-- CARD Bewertungen -->
                 <v-card v-for="b in ClubsBewertungen" v-bind:key="b.id">
-                  <!-- Rating -->
+                  <!-- Bewertungen - Rating -->
                   <v-row
                     ><v-rating
                       :value="Math.round(b.stars)"
@@ -84,9 +86,9 @@
                     ></v-rating
                   ></v-row>
 
+                  <!-- Bewertungen - Beschreibung -->
                   <v-row class="my-4 mx-auto text-subtitle-1">
                     <span class="font-weight-bold ml-4">Beschreibung</span>
-
                     <v-card-text>{{ b.description }}</v-card-text>
                   </v-row>
                 </v-card>
@@ -95,9 +97,9 @@
             </v-card>
           </template>
         </v-dialog>
-        <!--  -->
+        <!-- Bewertungen - ENDE -->
 
-        <!-- Club beschreibung -->
+        <!-- Club Infos -->
         <v-card-text
           ><span class="font-weight-bold">Preis:</span> {{ c.price }}
           <br /><span class="font-weight-bold">Musik:</span> {{ c.music }}
@@ -106,16 +108,16 @@
             c.website
           }}
         </v-card-text>
+        <!-- Club Infos ENDE -->
 
-        <!-- Club beschreibung -->
-        <v-card-text class="mt-0"></v-card-text>
-
+        <!-- Bewertung erstellen -->
         <v-card-actions>
           <v-dialog
             transition="dialog-top-transition"
             persistent
             max-width="600px"
           >
+            <!-- Bewertung erstellen - Button -->
             <template v-slot:activator="{ on, attrs }">
               <!-- Den Club Filtern -->
               <div v-bind="attrs" v-on="on" text @click="filterBewertung(c.id)">
@@ -123,18 +125,18 @@
                 <v-btn>Bewerten</v-btn>
               </div>
             </template>
-            <template v-slot:default="dialogCB">
-              <!--  -->
-              <!-- Überschrift -->
+            <!-- Bewertung erstellen - Button ENDE -->
 
+            <!-- Bewertung erstellen - Form -->
+            <template v-slot:default="dialogCB">
               <v-card>
                 <v-card-title>
-                  <span class="text-h7 mb-5">Bewertungen</span>
+                  <span class="text-h7 mb-5">Clubs bewerten</span>
                 </v-card-title>
                 <v-card-text>
-                  <!-- Sterne Geben -->
-                  <!--  -->
                   <v-container>
+                    <!-- Bewertung erstellen - Rating -->
+
                     <v-row>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
@@ -146,6 +148,9 @@
                           v-model="bewertungStars"
                         ></v-text-field>
                       </v-col>
+                      <!-- Bewertung erstellen - Rating  ENDE-->
+
+                      <!-- Bewertung erstellen - Beschreibung -->
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Beschreibung"
@@ -153,8 +158,13 @@
                           clearable
                         ></v-text-field>
                       </v-col>
+                      <!-- Bewertung erstellen - Beschreibung ENDE -->
+
+                      <!--  -->
                       <v-card-actions>
                         <v-spacer></v-spacer>
+                        <!-- Bewertung erstellen - Close -->
+
                         <v-btn
                           color="blue darken-1"
                           text
@@ -162,6 +172,8 @@
                         >
                           Close
                         </v-btn>
+
+                        <!-- Bewertung erstellen - Save -->
                         <v-btn
                           color="blue darken-1"
                           text
@@ -184,8 +196,6 @@
             </template>
           </v-dialog>
         </v-card-actions>
-
-        <!-- Club Name -->
       </v-card>
     </v-col>
   </div>
@@ -214,13 +224,8 @@ export default {
   },
   methods: {
     filterBewertung(id) {
-      // Der Club wird gefiltert
-
-      // console.log(id);
-      // console.log(this.bewertungen);
       this.ClubsBewertungen = this.bewertungen.filter((b) => b.lokal_id == id);
       console.log(this.ClubsBewertungen);
-      // console.log(Math.round(this.club.avg));
     },
     filterPreisklasse(pk) {
       if (pk != 'Alle') {
@@ -232,16 +237,13 @@ export default {
           this.filterClubs = this.clubs.filter((c) => c.price.length === 3);
       } else this.filterClubs = this.clubs;
     },
-    createBewertung(beschreibung, rating, lokalId)
-    {
+    createBewertung(beschreibung, rating, lokalId) {
       this.dialogCB = false;
       console.log(beschreibung, rating, lokalId);
-    }
+    },
   },
   created() {
     this.filterClubs = this.clubs;
   },
 };
 </script>
-
-<style lang="scss" scoped></style>

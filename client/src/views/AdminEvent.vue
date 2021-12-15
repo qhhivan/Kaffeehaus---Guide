@@ -1,35 +1,39 @@
 <template>
   <div>
-    <!-- Appbar -->
+    <!-- APPBAR -->
     <v-col cols="12">
       <v-card color="grey lighten-4" flat tile>
         <v-toolbar>
+          <!-- Überschrift -->
           <v-toolbar-title>Admin - Events</v-toolbar-title>
+
+          <!-- Neues Event erstellen -->
           <v-dialog
             transition="dialog-top-transition"
             persistent
             max-width="600px"
           >
+            <!-- Button Event Erstellen -->
             <template v-slot:activator="{ on, attrs }" :search="events.title">
-              <!-- Den Club Filtern -->
               <div v-bind="attrs" v-on="on" text>
-                <!-- onclick sollen alle Bewertungen angezeigt werden -->
-
-                <v-btn color="grey" right>New Events</v-btn>
+                <v-btn color="grey" right>+</v-btn>
               </div>
-
-              <!--  -->
             </template>
+
+            <!-- Form zum Erstellen -->
             <template v-slot:default="dialogCE">
-              <!--  -->
-              <!-- Überschrift -->
               <v-card>
+                <!-- Überschrift -->
                 <v-card-title>
                   <span class="text-h5">Bearbeiten</span>
                 </v-card-title>
+                <!--  -->
+
+                <!-- FORM -->
                 <v-card-text>
                   <v-container>
                     <v-row>
+                      <!-- Event Name -->
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Eventname"
@@ -37,48 +41,17 @@
                           v-model="newEvent.title"
                         ></v-text-field>
                       </v-col>
+
+                      <!-- Event Datum -->
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Datum"
                           required
                           v-model="newEvent.date"
                         ></v-text-field>
-                        <!--  -->
-                        <v-menu
-                          ref="menu"
-                          v-model="menu"
-                          :close-on-content-click="false"
-                          :return-value.sync="e.date"
-                          transition="scale-transition"
-                          offset-y
-                          min-width="auto"
-                        >
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-text-field
-                              v-model="newEvent.date"
-                              label="Picker in menu"
-                              prepend-icon="mdi-calendar"
-                              readonly
-                              v-bind="attrs"
-                              v-on="on"
-                            ></v-text-field>
-                          </template>
-                          <!-- <v-date-picker v-model="e.date" no-title scrollable>
-                            <v-spacer></v-spacer>
-                            <v-btn text color="primary" @click="menu = false">
-                              Cancel
-                            </v-btn>
-                            <v-btn
-                              text
-                              color="primary"
-                              @click="$refs.menu.save(e.date)"
-                            >
-                              OK
-                            </v-btn>
-                          </v-date-picker> -->
-                        </v-menu>
-                        <!--  -->
                       </v-col>
+
+                      <!-- Event - Uhrzeit -->
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Uhrzeit"
@@ -86,6 +59,8 @@
                           v-model="newEvent.time"
                         ></v-text-field>
                       </v-col>
+
+                      <!-- Event - Beschreibung -->
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Beschreibung"
@@ -93,6 +68,8 @@
                           v-model="newEvent.description"
                         ></v-text-field>
                       </v-col>
+
+                      <!-- Event - Club -->
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           label="Club"
@@ -103,8 +80,12 @@
                     </v-row>
                   </v-container>
                 </v-card-text>
+                <!--  -->
+
+                <!-- Save/Close -->
                 <v-card-actions>
                   <v-spacer></v-spacer>
+                  <!-- Close -->
                   <v-btn
                     color="blue darken-1"
                     text
@@ -112,6 +93,8 @@
                   >
                     Close
                   </v-btn>
+
+                  <!-- Save -->
                   <v-btn color="blue darken-1" text @click="updateClub(e)">
                     Save
                   </v-btn>
@@ -122,63 +105,46 @@
         </v-toolbar>
       </v-card>
     </v-col>
+    <!-- APPBAR - ENDE -->
 
-    <!--  -->
-    <!-- Es soll ein Formular sein mit schon ausgefühlten Daten von dem Event -->
-
-    <!-- Event Title -->
-    <!-- Event Beschreibung -->
-    <!-- Event Uhrzeit -->
-    <!-- Event Datum -->
-    <!-- Event lokal_id -->
-    <!-- Event Music -->
-
-    <!-- Ganz Unten soll ein Del. und ein Save Button stehen -->
-
-    <!-- Delete Event -->
-    <!-- Save/ Update --UpdateEvents -->
+    <!-- Dialog - Events Card  -->
     <v-col cols="12" v-for="e in events" v-bind:key="e.id">
+      <!-- Event Updaten -->
       <v-dialog transition="dialog-top-transition" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }" :search="events.title">
-          <!-- Den Club Filtern -->
           <div v-bind="attrs" v-on="on" text>
-            <!-- onclick sollen alle Bewertungen angezeigt werden -->
-
             <v-card color="#385F73" dark>
-              <!-- Club Name -->
+              <!-- Event Name -->
               <v-card-title class="text-h5">{{ e.title }}</v-card-title>
 
               <!-- Datum und Uhrzeit -->
               <v-card-subtitle>{{ e.date }} {{ e.time }}</v-card-subtitle>
 
-              <!-- Club beschreibung -->
+              <!-- Event Beschreibung -->
               <v-card-subtitle
                 >Beschreibung:{{ e.description }}</v-card-subtitle
               >
-              <v-btn v-bind="attrs" v-on="on" text @click="filterClub(e.name)">
+              <v-btn readonly>
                 {{ e.name }}
               </v-btn>
-
-              <!-- Club Name -->
-              <!-- Wenn man hier auf den Club drückt wird man weitergeleitet zu den Club Infos -->
-              <!-- <v-btn text>{{ e.name }}</v-btn> -->
-
-              <!-- DIALOG -->
             </v-card>
           </div>
+          <!-- Dialog Card Ende -->
 
-          <!--  -->
+          <!-- Form Update  -->
         </template>
         <template v-slot:default="dialog">
-          <!--  -->
-          <!-- Überschrift -->
           <v-card>
             <v-card-title>
               <span class="text-h5">Bearbeiten</span>
             </v-card-title>
+            <!-- Überschrift -->
+
+            <!-- FORM UPDATE -->
             <v-card-text>
               <v-container>
                 <v-row>
+                  <!-- NAME -->
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       label="Eventname"
@@ -187,6 +153,8 @@
                       v-model="e.title"
                     ></v-text-field>
                   </v-col>
+
+                  <!-- DATUM -->
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       label="Datum"
@@ -194,42 +162,9 @@
                       :value="e.date"
                       v-model="e.date"
                     ></v-text-field>
-                    <!--  -->
-                    <v-menu
-                      ref="menu"
-                      v-model="menu"
-                      :close-on-content-click="false"
-                      :return-value.sync="e.date"
-                      transition="scale-transition"
-                      offset-y
-                      min-width="auto"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-text-field
-                          v-model="e.date"
-                          label="Picker in menu"
-                          prepend-icon="mdi-calendar"
-                          readonly
-                          v-bind="attrs"
-                          v-on="on"
-                        ></v-text-field>
-                      </template>
-                      <v-date-picker v-model="e.date" no-title scrollable>
-                        <v-spacer></v-spacer>
-                        <v-btn text color="primary" @click="menu = false">
-                          Cancel
-                        </v-btn>
-                        <v-btn
-                          text
-                          color="primary"
-                          @click="$refs.menu.save(e.date)"
-                        >
-                          OK
-                        </v-btn>
-                      </v-date-picker>
-                    </v-menu>
-                    <!--  -->
                   </v-col>
+
+                  <!-- UHRZEIT -->
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       label="Uhrzeit"
@@ -238,6 +173,8 @@
                       v-model="e.time"
                     ></v-text-field>
                   </v-col>
+
+                  <!-- BESCHREIBUNG -->
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       label="Beschreibung"
@@ -246,6 +183,8 @@
                       v-model="e.description"
                     ></v-text-field>
                   </v-col>
+
+                  <!-- CLUB NAME -->
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       label="Club"
@@ -256,11 +195,17 @@
                 </v-row>
               </v-container>
             </v-card-text>
+            <!--  -->
+
+            <!-- Close/Save -->
             <v-card-actions>
               <v-spacer></v-spacer>
+              <!-- Close -->
               <v-btn color="blue darken-1" text @click="dialog.value = false">
                 Close
               </v-btn>
+
+              <!-- Save -->
               <v-btn color="blue darken-1" text @click="updateClub(e)">
                 Save
               </v-btn>
@@ -296,13 +241,8 @@ export default {
       console.log(event);
     },
     filterClub(name) {
-      // Der Club wird gefiltert
-
-      // console.log(name);
-      // console.log(this.clubs);
       this.club = this.clubs.filter((c) => c.name == name)[0];
       console.log(this.club);
-      // console.log(Math.round(this.club.avg));
     },
   },
 };

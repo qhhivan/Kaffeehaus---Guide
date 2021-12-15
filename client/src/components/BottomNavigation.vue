@@ -1,28 +1,11 @@
 <template>
-  <!-- <v-bottom-navigation fixed app :value="value" color="primary" background-color="red"
-    shift
-      >
-      <v-btn :to="'/events'">
-        <span>Events</span>
-        <v-icon>mdi-history</v-icon>
-      </v-btn>
-
-      <v-btn disabled>
-        <span>Logo</span>
-        <v-icon>LOGO</v-icon>
-      </v-btn>
-
-      <v-btn :to="'/clubs'">
-        <span>Club</span>
-        <v-icon>mdi-map-marker</v-icon>
-      </v-btn>
-    </v-bottom-navigation> -->
   <v-bottom-navigation
     background-color="blue-grey"
     fixed
     class="pa-3"
     height="70"
   >
+    <!-- Events -->
     <v-btn :to="'/events'" class="blue-grey">
       <img src="../../public/img/calendar.png" width="35" height="35" />
     </v-btn>
@@ -33,8 +16,7 @@
     </div>
 
     <v-btn :to="'/clubs'" class="blue-grey">
-      <!-- <span>Club</span> -->
-
+      <!-- Clubs -->
       <img src="../../public/img/glass-cocktail.png" width="35" height="35" />
     </v-btn>
   </v-bottom-navigation>

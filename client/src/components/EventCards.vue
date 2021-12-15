@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- EVENT - CARD -->
     <v-col cols="12" v-for="e in events" v-bind:key="e.id">
       <v-card color="#385F73" dark>
         <!-- Club Name -->
@@ -11,28 +12,31 @@
         <!-- Club beschreibung -->
         <v-card-subtitle>Beschreibung:{{ e.description }}</v-card-subtitle>
 
-        <!-- Club Name -->
         <v-card-actions>
-          <!-- Wenn man hier auf den Club drückt wird man weitergeleitet zu den Club Infos -->
-          <!-- <v-btn text>{{ e.name }}</v-btn> -->
-
-          <!-- DIALOG -->
-          <v-dialog transition="dialog-top-transition" persistent max-width="600px">
+          <!-- DIALOG - Wenn man hier auf den Club drückt wird man weitergeleitet zu den Club Infos -->
+          <v-dialog
+            transition="dialog-top-transition"
+            persistent
+            max-width="600px"
+          >
+            <!-- Button zum öffnen von Dialog -->
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" v-on="on" text @click="filterClub(e.name)">
                 {{ e.name }}
               </v-btn>
             </template>
+
+            <!-- Das Dialog Fenster -->
             <template v-slot:default="dialog">
-              <!--  -->
               <v-card>
+                <!-- Überschrift -->
                 <v-card-title>
                   <span class="text-h5">{{ club.name }}</span>
                 </v-card-title>
+
+                <!-- Content -->
                 <v-card-text>
                   <v-container>
-                    <!--  -->
-
                     <!-- Rating -->
                     <v-row
                       ><v-rating
@@ -45,9 +49,9 @@
                       ></v-rating
                     ></v-row>
 
+                    <!-- Adresse -->
                     <v-row class="my-4 text-subtitle-1">
-                      <span class="font-weight-bold">Address</span>
-
+                      <span class="font-weight-bold">Address: </span>
                       <v-card-text>{{ club.address }}</v-card-text>
                     </v-row>
 
@@ -59,31 +63,34 @@
 
                     <!-- Musik -->
                     <v-row class="my-4 text-subtitle-1">
-                      <span class="font-weight-bold">Musik:</span>
+                      <span class="font-weight-bold">Musik: </span>
                       <v-card-text>{{ club.music }}</v-card-text>
                     </v-row>
 
                     <!-- Price -->
                     <v-row class="my-4 text-subtitle-1">
-                      <span class="font-weight-bold">Preis:</span>
+                      <span class="font-weight-bold">Preis: </span>
                       {{ club.price }}
                     </v-row>
 
                     <!-- Telefonnummer -->
                     <v-row class="my-4 text-subtitle-1">
-                      <span class="font-weight-bold">Tel.</span>
+                      <span class="font-weight-bold">Tel. </span>
                       {{ club.phone_number }}
                     </v-row>
 
                     <!-- WEBSITE -->
                     <v-row class="my-4 text-subtitle-1">
-                      <span class="font-weight-bold">Webseite</span>
+                      <span class="font-weight-bold">Webseite </span>
                     </v-row>
                     <v-row>
                       {{ club.website }}
                     </v-row>
                   </v-container>
                 </v-card-text>
+                <!-- Content ENDE -->
+
+                <!-- Zum Schließen vom Fenster -->
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="#385F73" text @click="dialog.value = false">
@@ -113,16 +120,9 @@ export default {
   },
   methods: {
     filterClub(name) {
-      // Der Club wird gefiltert
-
-      // console.log(name);
-      // console.log(this.clubs);
       this.club = this.clubs.filter((c) => c.name == name)[0];
       console.log(this.club);
-      // console.log(Math.round(this.club.avg));
     },
   },
 };
 </script>
-
-<style lang="scss" scoped></style>
