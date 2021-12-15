@@ -57,7 +57,12 @@
                   color="blue darken-1"
                   text
                   @click="
-                    createBewertung(bewertungStars, bewertungBeschreibung, c.id), dialog.value = false
+                    createBewertung(
+                      bewertungStars,
+                      bewertungBeschreibung,
+                      c.id,
+                    ),
+                      (dialog.value = false)
                   "
                 >
                   Save
@@ -73,6 +78,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   props: {
     c: Object,
@@ -80,14 +87,26 @@ export default {
   data() {
     return {
       dialog: false,
-      bewertungStars: '',
-      bewertungBeschreibung: '',
+      bewertungStars: '3',
+      bewertungBeschreibung: 'TEST',
     };
   },
   methods: {
-    createBewertung(beschreibung, rating, lokalId) {
+    async createBewertung(rating, beschreibung, lokalId) {
       console.log(beschreibung, rating, lokalId);
+      try {
+        await axios.post('http://localhost:3000/bewertung', {
+          stars: rating,
+          description: beschreibung,
+          lokal_id: lokalId,
+        });
+        return true;
+      } catch (error) {
+        console.log(error.message);
+      }
     },
+
+    
   },
 };
 </script>

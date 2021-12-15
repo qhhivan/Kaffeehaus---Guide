@@ -20,8 +20,7 @@ Content-Type: application/json
     "description": "Happyhour",
     "time": "19:00",
     "date": "06.11.2021",
-    "lokalId": 5,
-    "music": "Pop"
+    "lokalId": 5
 }
 ###
 
@@ -47,21 +46,20 @@ Content-Type: application/json
     "music":"TEST", 
     "phoneNumber":"0123456789", 
     "price":"$$$", 
-    "name":"TElST", 
+    "name":"TESfdT", 
     "openingHours":"12:00 - 06:00"
 }
 
 ### UPDATE
-PATCH http://localhost:3000/events/2
+PATCH http://localhost:3000/events/4
 Content-Type: application/json
 
 {
-    "title": "Test Event - Loco",
+    "title": "Test Event - Locodsfa",
     "description": "Happyhour",
     "time": "20:00",
     "date": "06.11.2021",
     "lokal_id": 5,
-    "music": "POP"
 }
 ###
 #NEIN

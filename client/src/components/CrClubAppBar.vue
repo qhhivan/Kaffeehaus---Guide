@@ -49,7 +49,7 @@
                     <v-text-field
                       label="Adresse"
                       required
-                      v-model="newClub.addresse"
+                      v-model="newClub.address"
                     ></v-text-field>
                   </v-col>
 
@@ -109,6 +109,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   props: {
     clubs: Array,
@@ -117,20 +119,32 @@ export default {
     return {
       dialog: false,
       newClub: {
-        music: '',
-        opening_hours: '',
-        phone_number: '',
-        price: '',
-        website: '',
-        address: '',
-        name: '',
+        music: 'Dragana',
+        opening_hours: 'Uvjek',
+        phone_number: '123456789',
+        price: '$',
+        website: 'NIX',
+        address: 'U PM',
+        name: 'DM SAT',
       },
     };
   },
   methods: {
-    addEvent() {
-        // AXIOS CALL
-        console.log('OK');
+    async addEvent() {
+      // AXIOS CALL
+      try {
+        await axios.post('http://localhost:3000/clubs', {
+          address: this.newEvent.address,
+          website: this.newEvent.website,
+          music: this.newEvent.music,
+          phoneNumber: this.newEvent.phone_number,
+          price: this.newEvent.price,
+          openingHours: this.newEvent.opening_hours,
+        });
+        return true;
+      } catch (error) {
+        console.log(error.message);
+      }
     },
     // function welche mir die LokalID liefert
     filterClubID(name) {

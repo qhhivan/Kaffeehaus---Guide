@@ -95,6 +95,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   props: {
     clubs: Array,
@@ -104,25 +105,32 @@ export default {
       dialog: false,
       newEvent: {
         lokalId: '',
-        date: '',
-        description: '',
-        title: '',
-        time: '',
-        name: '',
+        date: '12.12.2021',
+        description: 'Vallah Ge',
+        title: 'TEst Event',
+        time: '12:12',
+        name: 'Club Loco',
       },
     };
   },
   methods: {
-    addEvent() {
-        // AXIOS CALL
-        
-      this.newEvent.lokalId = this.filterClubID(this.newEvent.name);
-      console.log(this.newEvent.lokalId);
-      console.log(this.newEvent.date);
-      console.log(this.newEvent.description);
-      console.log(this.newEvent.title);
-      console.log(this.newEvent.time);
-      console.log(this.newEvent.name);
+    async addEvent() {
+      // AXIOS CALL
+      try {
+        console.log(this.newEvent);
+        this.newEvent.lokalId = this.filterClubID(this.newEvent.name);
+        await axios.post('http://localhost:3000/events', {
+          title: this.newEvent.title,
+          description: this.newEvent.description,
+          time: this.newEvent.time,
+          date: this.newEvent.date,
+          lokalId: this.newEvent.lokalId
+        });
+        console.log('Erfolgreich hinzugefügt');
+        return true;
+      } catch (err) {
+        console.log(err.message);
+      }
     },
     // function welche mir die LokalID liefert
     filterClubID(name) {

@@ -91,7 +91,13 @@
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn color="error" @click="deleteEvent(e.event_id)" text> Delete </v-btn>
+          <v-btn
+            color="error"
+            @click="deleteEvent(e.event_id), (dialog.value = false)"
+            text
+          >
+            Delete
+          </v-btn>
 
           <!-- Close -->
           <v-btn color="blue darken-1" text @click="dialog.value = false">
@@ -99,7 +105,11 @@
           </v-btn>
 
           <!-- Save -->
-          <v-btn color="blue darken-1" text @click="updateClub(e)">
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="updateClub(e), (dialog.value = false)"
+          >
             Save
           </v-btn>
         </v-card-actions>
@@ -109,6 +119,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   props: {
     e: Object,
@@ -119,12 +131,27 @@ export default {
     };
   },
   methods: {
-    updateClub(event) {
+    async updateClub(event) {
       console.log(event);
+      try {
+        await axios.patch(`http://localhost:3000/events/${event.event_id}`, {
+          title: event.title,
+          description: event.description,
+          time: event.time,
+          date: event.date,
+          lokal_id: event.lokal_id,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
     },
-    deleteEvent(id) {
-      this.dialog = false;
+    async deleteEvent(id) {
       console.log(`Delete Event ${id}`);
+      try {
+        axios.delete(`http://localhost:3000/events/${id}`);
+      } catch (error) {
+        console.log(error.message);
+      }
     },
   },
 };

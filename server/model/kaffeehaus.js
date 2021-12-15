@@ -25,9 +25,7 @@ async function getEvents() {
 }
 // Alle Bewertungen
 async function getBewertungen() {
-  const { rows } = await db.query(
-    'SELECT * FROM bewertungen',
-  );
+  const { rows } = await db.query('SELECT * FROM bewertungen');
   return rows;
 }
 
@@ -76,11 +74,11 @@ async function createClub(
 }
 
 // Insert Event
-async function createEvent(title, description, time, date, lokal_id, music) {
+async function createEvent(title, description, time, date, lokal_id) {
   console.log(title);
   await db.query(
-    'INSERT INTO events (title, description, time, date, lokal_id, music)  values ($1, $2, $3, $4, $5, $6)',
-    [title, description, time, date, lokal_id, music],
+    'INSERT INTO events (title, description, time, date, lokal_id)  values ($1, $2, $3, $4, $5, $6)',
+    [title, description, time, date, lokal_id],
   );
   return 'Erfolgreich Hinzugefügt';
 }

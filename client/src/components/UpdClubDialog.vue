@@ -131,7 +131,12 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <!-- Delete -->
-          <v-btn depressed color="error" text @click="deleteClub(c.id)">
+          <v-btn
+            depressed
+            color="error"
+            text
+            @click="deleteClub(c.id), (dialog.value = false)"
+          >
             Delete
           </v-btn>
           <!-- Close -->
@@ -140,7 +145,11 @@
           </v-btn>
 
           <!-- Save -->
-          <v-btn color="blue darken-1" text @click="updateClub(c)">
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="updateClub(c), (dialog.value = false)"
+          >
             Save
           </v-btn>
         </v-card-actions>
@@ -150,6 +159,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   props: {
     c: Object,
@@ -160,11 +170,30 @@ export default {
     };
   },
   methods: {
-    deleteClub(id) {
+    async deleteClub(id) {
       console.log(`Delete Club ${id}`);
+      try {
+        axios.delete(`http://localhost:3000/clubs/${id}`);
+      } catch (error) {
+        console.log(error.message);
+      }
     },
-    updateClub(club) {
+    async updateClub(club) {
       console.log(club);
+      try {
+        await axios.patch(`http://localhost:3000/clubs/${club.id}`, {
+          address: club.address,
+          website: club.website,
+          music: club.music,
+          phone_number: club.phone_number,
+          price: club.price,
+          name: club.name,
+          opening_hours: club.opening_hours,
+        });
+        return true;
+      } catch (error) {
+        console.log(error.message);
+      }
     },
   },
 };
