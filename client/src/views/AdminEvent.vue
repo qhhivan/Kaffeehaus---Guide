@@ -1,6 +1,5 @@
 <template>
   <div>
-    <v-col cols="12"> </v-col>
     <!-- APP-BAR -->
     <!-- Create Event -->
     <CrEventAppBar :clubs="clubs" />
