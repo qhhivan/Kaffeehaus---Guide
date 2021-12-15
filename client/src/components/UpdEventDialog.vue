@@ -2,12 +2,15 @@
   <v-dialog transition="dialog-top-transition" persistent max-width="600px">
     <template v-slot:activator="{ on, attrs }" :search="events.title">
       <div v-bind="attrs" v-on="on" text>
-        <v-card color="#385F73" dark>
+        <v-card color="primary" dark>
           <!-- Event Name -->
           <v-card-title class="text-h5">{{ e.title }}</v-card-title>
 
           <!-- Datum und Uhrzeit -->
-          <v-card-subtitle>{{ e.date }} {{ e.time }}</v-card-subtitle>
+          <v-card-subtitle
+            >{{ e.date.substring(0, 9) }}
+            {{ e.time.substring(0, 5) }}</v-card-subtitle
+          >
 
           <!-- Event Beschreibung -->
           <v-card-subtitle>Beschreibung:{{ e.description }}</v-card-subtitle>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Filter nach Preisklasse -->
-    <v-toolbar dense elevation="4" color="red" class="pb-10" fixed>
+    <v-toolbar dense elevation="4" color="#272727" dark class="pb-10" fixed>
       <v-select
         v-model="preisklasse"
         :items="preisklassen"
@@ -14,7 +14,7 @@
 
     <!-- CLUB CARD -->
     <v-col cols="12" v-for="c in filterClubs" v-bind:key="c.id">
-      <v-card color="#385F73" dark>
+      <v-card color="primary" dark>
         <!-- Club Name -->
         <v-card-title class="text-h5 mb-4">{{ c.name }}</v-card-title>
 

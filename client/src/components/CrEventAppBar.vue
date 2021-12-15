@@ -1,15 +1,15 @@
 <template>
-  <v-card color="grey lighten-4" flat tile>
+  <v-card  flat tile>
     <v-toolbar>
       <!-- Überschrift -->
-      <v-toolbar-title>Admin - Events</v-toolbar-title>
+      <v-toolbar-title class="mr-16 ml-4">Admin - Events</v-toolbar-title>
 
       <!-- Neues Event erstellen -->
       <v-dialog transition="dialog-top-transition" persistent max-width="600px">
         <!-- Button Event Erstellen -->
-        <template v-slot:activator="{ on, attrs }">
-          <div v-bind="attrs" v-on="on" text>
-            <v-btn color="grey" right>+</v-btn>
+        <template v-slot:activator="{ on, attrs }" >
+          <div v-bind="attrs" v-on="on" text class="ml-16">
+            <v-btn color="primary" outlined >+</v-btn>
           </div>
         </template>
 

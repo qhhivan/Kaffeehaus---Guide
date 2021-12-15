@@ -2,15 +2,17 @@
   <div>
     <!-- EVENT - CARD -->
     <v-col cols="12" v-for="e in events" v-bind:key="e.id">
-      <v-card color="#385F73" dark>
+      <v-card color="primary" dark>
         <!-- Club Name -->
         <v-card-title class="text-h5">{{ e.title }}</v-card-title>
 
         <!-- Datum und Uhrzeit -->
-        <v-card-subtitle>{{ e.date }} {{ e.time }}</v-card-subtitle>
+        <v-card-subtitle
+          >{{ e.date.substring(0, 9) }} {{ e.time.substring(0, 5) }}</v-card-subtitle
+        >
 
         <!-- Club beschreibung -->
-        <v-card-subtitle>Beschreibung:{{ e.description }}</v-card-subtitle>
+        <v-card-subtitle>Beschreibung: {{ e.description }}</v-card-subtitle>
 
         <v-card-actions>
           <!-- DIALOG - Wenn man hier auf den Club drückt wird man weitergeleitet zu den Club Infos -->
@@ -93,7 +95,7 @@
                 <!-- Zum Schließen vom Fenster -->
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="#385F73" text @click="dialog.value = false">
+                  <v-btn color="primary" text @click="dialog.value = false">
                     Close
                   </v-btn>
                 </v-card-actions>

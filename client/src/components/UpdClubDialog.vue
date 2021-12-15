@@ -3,7 +3,7 @@
     <template v-slot:activator="{ on, attrs }">
       <div v-bind="attrs" v-on="on" text>
         <!-- Club Cards - Alle Clubs werden angezeigt -->
-        <v-card color="#385F73" dark>
+        <v-card color="primary" dark>
           <!-- Club Name -->
           <v-card-title class="text-h5 mb-4">{{ c.name }}</v-card-title>
 
